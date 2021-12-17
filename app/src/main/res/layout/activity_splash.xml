@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3E444E"
+    tools:context=".Splash">
+
+    <TextView
+        android:id="@+id/Vstream_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Vstream"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/Vstream_logo"
+        android:layout_above="@+id/Vstream_banner"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/splashlogo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/Vstream_slogan"
+        android:layout_height="wrap_content"
+        android:text="A Streaming Platform"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-black"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/Vstream_banner"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:textAlignment="center"
+        />
+
+</RelativeLayout>

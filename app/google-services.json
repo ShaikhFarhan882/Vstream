@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "418062519567",
+    "project_id": "vstream-3ddb8",
+    "storage_bucket": "vstream-3ddb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418062519567:android:bb970f68eae8ba066ec27a",
+        "android_client_info": {
+          "package_name": "com.example.vstream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418062519567-46k2beoam8f77o4qsorprkntub892m16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbAHrIqEM25116Pbdp-9IsIFjMk12FdbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418062519567-46k2beoam8f77o4qsorprkntub892m16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
