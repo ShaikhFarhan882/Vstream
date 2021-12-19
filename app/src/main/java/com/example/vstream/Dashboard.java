@@ -8,14 +8,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Dashboard extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    FloatingActionButton addVideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +29,13 @@ public class Dashboard extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
+        addVideo = (FloatingActionButton)findViewById(R.id.Add_video);
+
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 
         bottomNavigationView.setSelectedItemId(R.id.home);
+
+        //Navigation bar Implementation
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -57,6 +64,26 @@ public class Dashboard extends AppCompatActivity {
                 return false;
             }
         });
+
+        //Floating action button
+
+        addVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent intent = new Intent(getApplicationContext(),AddVideo.class);
+              startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
         }
 
