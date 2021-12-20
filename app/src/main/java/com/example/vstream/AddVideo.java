@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.VideoView;
 
 import com.karumi.dexter.Dexter;
@@ -20,12 +22,19 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import es.dmoral.toasty.Toasty;
+
 public class AddVideo extends AppCompatActivity {
 
     VideoView videoView;
     Button Browse,Upload;
     Uri videouri;
     MediaController mediaController;
+
+    //Radio Button
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    int checkedRadioID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,8 @@ public class AddVideo extends AppCompatActivity {
         mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         videoView.start();
+
+        radioGroup = (RadioGroup) findViewById(R.id.category_radiogroup);
 
        //Browse Button Implementation and Managing Runtime Permissions
 
@@ -86,5 +97,16 @@ public class AddVideo extends AppCompatActivity {
             videouri=data.getData();
             videoView.setVideoURI(videouri);
         }
+    }
+
+    //Radio Button Implementation
+
+    public void Checkbutton (View v){
+
+        checkedRadioID = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(checkedRadioID);
+
+        Toasty.normal(getApplicationContext(),"Selected Category: " + radioButton.getText(),Toasty.LENGTH_SHORT).show();
+
     }
 }

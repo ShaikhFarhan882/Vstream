@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Vstream</string>
+    <string-array name="Category">
+        <item>Sports</item>
+        <item>Cars</item>
+        <item>Travel</item>
+        <item>Food</item>
+    </string-array>
 </resources>
