@@ -164,6 +164,7 @@ public class AddVideo extends AppCompatActivity {
         dialog.setTitle("Uploading");
         dialog.show();
 
+
        final StorageReference uploader = storageReference.child(System.currentTimeMillis() + "." + getExtension(videouri));
 
 
@@ -176,7 +177,7 @@ public class AddVideo extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 //Realtime database
-                                Member obj = new Member(videoTitle.getText().toString(),uri.toString());
+                                Member obj = new Member(videoTitle.getText().toString(),uri.toString(),radioButton.getText().toString());
                                 databaseReference.child(databaseReference.push().getKey()).setValue(obj)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -211,4 +212,6 @@ public class AddVideo extends AppCompatActivity {
                 });
 
     }
+
+
 }
