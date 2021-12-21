@@ -1,20 +1,33 @@
 package com.example.vstream;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.VideoView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -30,11 +43,17 @@ public class AddVideo extends AppCompatActivity {
     Button Browse,Upload;
     Uri videouri;
     MediaController mediaController;
+    EditText videoTitle;
 
     //Radio Button
     RadioGroup radioGroup;
     RadioButton radioButton;
     int checkedRadioID;
+
+    //Firebase Storage and realtime database reference
+    StorageReference storageReference;
+    DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +72,16 @@ public class AddVideo extends AppCompatActivity {
         videoView.setMediaController(mediaController);
         videoView.start();
 
+        videoTitle = (EditText)findViewById(R.id.Video_title);
+
+
         radioGroup = (RadioGroup) findViewById(R.id.category_radiogroup);
+
+        //Storage and Realtime database Initializing
+        storageReference = FirebaseStorage.getInstance().getReference("uploadedVideo");
+        databaseReference = FirebaseDatabase.getInstance().getReference("video");
+
+
 
        //Browse Button Implementation and Managing Runtime Permissions
 
@@ -87,6 +115,16 @@ public class AddVideo extends AppCompatActivity {
         });
 
 
+        //Upload button Implementation
+
+        Upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadProcess();
+            }
+        });
+
+
     }
 
     @Override
@@ -100,13 +138,77 @@ public class AddVideo extends AppCompatActivity {
     }
 
     //Radio Button Implementation
-
     public void Checkbutton (View v){
 
         checkedRadioID = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(checkedRadioID);
 
         Toasty.normal(getApplicationContext(),"Selected Category: " + radioButton.getText(),Toasty.LENGTH_SHORT).show();
+
+    }
+
+
+    //Getting the video Extension
+    public String getExtension(Uri videouri){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(videouri));
+
+    }
+
+
+    //Uploading the actual video
+    public void uploadProcess(){
+
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle("Uploading");
+        dialog.show();
+
+       final StorageReference uploader = storageReference.child(System.currentTimeMillis() + "." + getExtension(videouri));
+
+
+        uploader.putFile(videouri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                //Realtime database
+                                Member obj = new Member(videoTitle.getText().toString(),uri.toString());
+                                databaseReference.child(databaseReference.push().getKey()).setValue(obj)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                dialog.dismiss();
+                                                Toasty.success(getApplicationContext(),"Successfully Uploaded",Toasty.LENGTH_SHORT).show();
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                dialog.dismiss();
+                                                Toasty.success(getApplicationContext(),"Failed to Upload",Toasty.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+
+                            }
+                        });
+
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        //calculating the uploaded percentage
+                        float per=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        dialog.setMessage("Uploaded :"+(int)per+"%");
+
+                    }
+                });
 
     }
 }
