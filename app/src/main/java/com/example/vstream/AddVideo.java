@@ -157,59 +157,64 @@ public class AddVideo extends AppCompatActivity {
     }
 
 
-    //Uploading the actual video
+    //Uploading the video to the database
     public void uploadProcess(){
 
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle("Uploading");
         dialog.show();
 
+        if(videouri != null){
 
-       final StorageReference uploader = storageReference.child(System.currentTimeMillis() + "." + getExtension(videouri));
+            final StorageReference uploader = storageReference.child(System.currentTimeMillis() + "." + getExtension(videouri));
+            uploader.putFile(videouri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                            uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    //Realtime database
+                                    Member obj = new Member(videoTitle.getText().toString(),uri.toString(),radioButton.getText().toString());
+                                    databaseReference.child(databaseReference.push().getKey()).setValue(obj)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    dialog.dismiss();
+                                                    Toasty.success(getApplicationContext(),"Successfully Uploaded",Toasty.LENGTH_SHORT).show();
 
-        uploader.putFile(videouri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    dialog.dismiss();
+                                                    Toasty.success(getApplicationContext(),"Failed to Upload",Toasty.LENGTH_SHORT).show();
 
-                        uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                //Realtime database
-                                Member obj = new Member(videoTitle.getText().toString(),uri.toString(),radioButton.getText().toString());
-                                databaseReference.child(databaseReference.push().getKey()).setValue(obj)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                dialog.dismiss();
-                                                Toasty.success(getApplicationContext(),"Successfully Uploaded",Toasty.LENGTH_SHORT).show();
+                                                }
+                                            });
 
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                dialog.dismiss();
-                                                Toasty.success(getApplicationContext(),"Failed to Upload",Toasty.LENGTH_SHORT).show();
+                                }
+                            });
 
-                                            }
-                                        });
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            //calculating the uploaded percentage
+                            float per=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                            dialog.setMessage("Uploaded :"+(int)per+"%");
 
-                            }
-                        });
+                        }
+                    });
 
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        //calculating the uploaded percentage
-                        float per=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
-                        dialog.setMessage("Uploaded :"+(int)per+"%");
-
-                    }
-                });
+        }
+        else {
+            dialog.dismiss();
+            Toasty.error(getApplicationContext(),"Please select a video before uploading",Toasty.LENGTH_SHORT).show();
+        }
 
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#FFE4C4"
     tools:context=".AddVideo">
 
 
@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/Video_title"
-        android:layout_width="250dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Enter Title"
         android:textColorHint="@color/black"
@@ -70,10 +70,11 @@
         android:id="@+id/browse_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/BrowseButton"
         android:text="Browse"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
@@ -85,7 +86,11 @@
         android:id="@+id/upload_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/UploadButton"
         android:text="Upload"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintLeft_toLeftOf="parent"
