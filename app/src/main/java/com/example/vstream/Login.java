@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +49,7 @@ public class Login extends AppCompatActivity {
         Login = findViewById(R.id.loginButton);
         forgotPassword = (TextView) findViewById(R.id.resetPassword);
         mAuth = FirebaseAuth.getInstance();
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +117,15 @@ public class Login extends AppCompatActivity {
                         });
             }
         });
+
+
+        // If the user is already Logged in the app
+        FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
+        if(User!=null){
+            Intent intent = new Intent(Login.this,Dashboard.class);
+            startActivity(intent);
+            finish();
+        }
 
 
 

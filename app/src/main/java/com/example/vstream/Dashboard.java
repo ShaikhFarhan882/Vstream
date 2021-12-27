@@ -3,22 +3,34 @@ package com.example.vstream;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Dashboard extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     FloatingActionButton addVideo;
+    RecyclerView recyclerView;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,47 @@ public class Dashboard extends AppCompatActivity {
         getSupportActionBar().hide();
 
         addVideo = (FloatingActionButton)findViewById(R.id.Add_video);
+
+        //Typecasting the Recyclerview and FireDatabase
+        recyclerView = (RecyclerView) findViewById(R.id.Dashboard_RV);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        database = FirebaseDatabase.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("video");
+
+
+
+       //fetching the data from the firebase using firebaseRecycler Adapter
+       FirebaseRecyclerOptions<Member> options =
+                new FirebaseRecyclerOptions.Builder<Member>()
+                        .setQuery(reference, Member.class)
+                        .build();
+
+        FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+                holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
+            }
+
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.single_row,parent,false);
+                return new ViewHolder(view);
+            }
+        };
+
+        firebaseRecyclerAdapter.startListening();
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+
+
+
+
+
+
+
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 
@@ -66,7 +119,6 @@ public class Dashboard extends AppCompatActivity {
         });
 
         //Floating action button
-
         addVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,15 +126,6 @@ public class Dashboard extends AppCompatActivity {
               startActivity(intent);
             }
         });
-
-
-
-
-
-
-
-
-
 
 
         }
@@ -100,4 +143,5 @@ public class Dashboard extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
 }

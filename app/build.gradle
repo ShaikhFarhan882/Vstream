@@ -39,7 +39,23 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //Added Dependencies
     implementation 'com.github.GrenderG:Toasty:1.5.2'
     implementation 'com.karumi:dexter:6.2.3'
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //Exoplayer Dependency
+    implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-transformer:2.13.3'
+
+
+
+    //Firebase RecyclerViewAdapter dependency
+    implementation 'com.firebaseui:firebase-ui-database:8.0.0'
 
 }
