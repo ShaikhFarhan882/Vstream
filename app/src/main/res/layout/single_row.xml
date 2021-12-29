@@ -4,6 +4,7 @@
     android:layout_height="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
+    android:backgroundTint="#2C2C2C"
     app:cardCornerRadius="4dp">
 
     <LinearLayout
@@ -27,6 +28,7 @@
             android:layout_margin="3dp"
             app:use_controller="true"
             app:resize_mode="fill"
+            android:padding="3dp"
             />
 
 

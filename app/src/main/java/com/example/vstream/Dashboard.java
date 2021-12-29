@@ -1,15 +1,21 @@
 package com.example.vstream;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +29,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import java.util.Locale;
+
+import es.dmoral.toasty.Toasty;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -31,6 +42,7 @@ public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase database;
     DatabaseReference reference;
+    String searchtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +50,15 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         //Hide Notification Panel
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+       /* getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();*/
+
+        //Setting the Action Bar Color
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#3700B3"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         addVideo = (FloatingActionButton)findViewById(R.id.Add_video);
 
@@ -47,7 +66,7 @@ public class Dashboard extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.Dashboard_RV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         database = FirebaseDatabase.getInstance();
-        reference = FirebaseDatabase.getInstance().getReference("video");
+        reference = database.getReference("video");
 
 
 
@@ -79,10 +98,7 @@ public class Dashboard extends AppCompatActivity {
 
 
 
-
-
-
-
+       //Working with the bottom Navigation Bar
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 
@@ -118,7 +134,8 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        //Floating action button
+
+        //Floating action button to add videos
         addVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,8 +145,10 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        }
+    }
 
+
+   //OnBack Pressed Implementation
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -144,4 +163,70 @@ public class Dashboard extends AppCompatActivity {
                 }).create().show();
     }
 
+
+
+    //Searching the video in the firebase database using search option
+    private void firebaseSearch(String searchtext){
+
+        String query = searchtext;
+        Query firebaseQuery = reference.orderByChild("videoTitle").startAt(query).endAt(query + "\uf8ff");
+
+        FirebaseRecyclerOptions<Member> options =
+                new FirebaseRecyclerOptions.Builder<Member>()
+                        .setQuery(firebaseQuery, Member.class)
+                        .build();
+
+        FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+                holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
+            }
+
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.single_row,parent,false);
+                return new ViewHolder(view);
+            }
+        };
+
+        firebaseRecyclerAdapter.startListening();
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+
+
+
+
+  //Related to search Option
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search,menu);
+        MenuItem item = menu.findItem(R.id.Search_firebase);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                firebaseSearch(query);
+                Toasty.success(getApplicationContext(),"Video Found Successfully",Toasty.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                firebaseSearch(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
+
 }
+
+
+

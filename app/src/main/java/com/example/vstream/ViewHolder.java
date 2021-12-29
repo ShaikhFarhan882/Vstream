@@ -60,6 +60,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         try
         {
 
+            //Playing the video from firebase to the exoplayer.
             vTitle.setText(videoTitle);
             Uri videouri = Uri.parse(videoURL);
             exoPlayer = new SimpleExoPlayer.Builder(application).build();

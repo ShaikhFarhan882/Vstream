@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFE4C4"
+    android:background="#2C2C2C"
     tools:context=".AddVideo">
 
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Video Preview"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/VideoPreview"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginTop="324dp"
         android:fontFamily="sans-serif"
         android:text="Tap on the video to display Media controller"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,8 +57,8 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Enter Title"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="Sports"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:onClick="Checkbutton"/>
 
         <RadioButton
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="Food"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:onClick="Checkbutton"/>
 
         <RadioButton
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="Travel"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:onClick="Checkbutton"/>
 
         <RadioButton
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="Other"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:onClick="Checkbutton"/>
 
 

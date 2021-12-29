@@ -10,4 +10,5 @@
     <color name="ColorPrimary">#3700B3</color>
     <color name="BrowseButton">#40E0D0</color>
     <color name="UploadButton">#87CEEB</color>
+    <color name="VideoPreview">#F44336</color>
 </resources>
