@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,8 +34,11 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collections;
 
@@ -44,11 +48,16 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     TextView vTitle;
     PlayerView playerView;
     SimpleExoPlayer exoPlayer;
+    ImageView like_btn;
+    TextView like_text;
+    DatabaseReference likeReference;
 
 
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
+        like_btn = itemView.findViewById(R.id.like_button);
+        like_text = itemView.findViewById(R.id.likes_textview);
 
     }
 
@@ -76,6 +85,40 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         catch (Exception ex){
             Log.d("Exoplayer Has Crashed",ex.getMessage().toString());
         }
+    }
+
+    //Checking if the user has liked a video or not
+    public void getLikeButtonStatus(final String postKey,final String currentUserId){
+
+        likeReference = FirebaseDatabase.getInstance().getReference("likes");
+        likeReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(postKey).hasChild(currentUserId)){
+
+                    int likeCount = (int)snapshot.child(postKey).getChildrenCount();
+                    like_text.setText(likeCount+ " Likes");
+                    like_btn.setImageResource(R.drawable.ic_like);
+
+                }
+
+                else {
+                    int likeCount = (int)snapshot.child(postKey).getChildrenCount();
+                    like_text.setText(likeCount+ " Likes");
+                    like_btn.setImageResource(R.drawable.ic_dislike);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
     }
 
 

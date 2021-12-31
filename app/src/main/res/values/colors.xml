@@ -11,4 +11,5 @@
     <color name="BrowseButton">#40E0D0</color>
     <color name="UploadButton">#87CEEB</color>
     <color name="VideoPreview">#F44336</color>
+    <color name="LikeButtonColor">#E94057</color>
 </resources>

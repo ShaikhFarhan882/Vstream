@@ -27,9 +27,14 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -42,6 +47,9 @@ public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase database;
     DatabaseReference reference;
+    DatabaseReference likeReference;
+    Boolean likeStatus = false;
+
     String searchtext;
 
     @Override
@@ -68,6 +76,10 @@ public class Dashboard extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("video");
 
+        //Typecasting the likeReference
+        likeReference = FirebaseDatabase.getInstance().getReference("likes");
+
+
 
 
        //fetching the data from the firebase using firebaseRecycler Adapter
@@ -79,6 +91,51 @@ public class Dashboard extends AppCompatActivity {
         FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+
+                //Getting the current user ID and VideoID for like functionality
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String currentUserID = user.getUid();
+                final String postKey = getRef(position).getKey();
+                holder.getLikeButtonStatus(postKey,currentUserID);
+
+                //If user clicks on the like button;
+                holder.like_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        likeStatus = true;
+
+                        likeReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(likeStatus==true){
+
+                                    if(snapshot.child(postKey).hasChild(currentUserID)){
+                                        likeReference.child(postKey).removeValue();
+                                        likeStatus = false;
+                                    }
+                                    else{
+                                        //Like of user is recorded.
+                                        likeReference.child(postKey).child(currentUserID).setValue(true);
+                                        Toasty.success(getApplicationContext(),"Liked",Toasty.LENGTH_SHORT).show();
+                                        likeStatus = false;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+                });
+
+
+
+
+
+                //Setting the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
             }
 
@@ -165,7 +222,7 @@ public class Dashboard extends AppCompatActivity {
 
 
 
-    //Searching the video in the firebase database using search option
+    //Searching the video in the firebase database using search option.
     private void firebaseSearch(String searchtext){
 
         String query = searchtext;
@@ -179,6 +236,45 @@ public class Dashboard extends AppCompatActivity {
         FirebaseRecyclerAdapter<Member,ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Member, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Member model) {
+                //Getting the current user ID and VideoID for like functionality
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String currentUserID = user.getUid();
+                final String postKey = getRef(position).getKey();
+                holder.getLikeButtonStatus(postKey,currentUserID);
+
+                //If user clicks on the like button;
+                holder.like_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        likeStatus = true;
+
+                        likeReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(likeStatus==true){
+
+                                    if(snapshot.child(postKey).hasChild(currentUserID)){
+                                        likeReference.child(postKey).removeValue();
+                                        likeStatus = false;
+                                    }
+                                    else{
+                                        //Like of user is recorded.
+                                        likeReference.child(postKey).child(currentUserID).setValue(true);
+                                        Toasty.success(getApplicationContext(),"Liked",Toasty.LENGTH_SHORT).show();
+                                        likeStatus = false;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+                });
+
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
             }
 
