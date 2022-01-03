@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         already_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this,Login.class);
                 startActivity(intent);
                 finish();
@@ -112,7 +111,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // If the user is already Logged in the application
+        FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
+        if(User!=null){
+            Intent intent = new Intent(MainActivity.this,Dashboard.class);
+            startActivity(intent);
+            finish();
+        }
+
+
+
+
     }
+
+
+
 
     public static boolean validate(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);

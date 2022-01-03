@@ -16,10 +16,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
@@ -31,6 +33,7 @@ public class Profile extends AppCompatActivity {
     Button UpdateDetails;
     EditText Username;
     CircleImageView profileImage;
+    TextView userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +56,11 @@ public class Profile extends AppCompatActivity {
         UpdateDetails =(Button)findViewById(R.id.update_Profile);
         Username =(EditText)findViewById(R.id.userName_Profile);
         profileImage =(CircleImageView)findViewById(R.id.userImage_profile);
+        userEmail =(TextView)findViewById(R.id.emailtv_Profle);
 
 
 
-
-
-
-
-
+        //Bottom Navigation Bar Typecasting
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 
@@ -109,6 +109,23 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        //Displaying the user Email in the profile section and showing the toast message related to it.
+        String email_tv= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        userEmail.setText(email_tv);
+
+        userEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toasty.info(getApplicationContext(),"This is your current email address",Toasty.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
 
 
 

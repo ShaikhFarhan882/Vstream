@@ -118,18 +118,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-        // If the user is already Logged in the app
-        FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
-        if(User!=null){
-            Intent intent = new Intent(Login.this,Dashboard.class);
-            startActivity(intent);
-            finish();
-        }
-
-
-
-
     }
 
     public static boolean validate(String emailStr) {
