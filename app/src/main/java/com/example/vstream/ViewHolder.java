@@ -61,6 +61,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+
+
+    //Setting up the exoplayer
     public void setExoplayer(Application application, String videoTitle,final String videoURL){
         vTitle = itemView.findViewById(R.id.dashboardVideoTitle);
         playerView = itemView.findViewById(R.id.exoPlayerView);
@@ -68,7 +71,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         try
         {
-
             //Playing the video from firebase to the exoplayer.
             vTitle.setText(videoTitle);
             Uri videouri = Uri.parse(videoURL);
@@ -78,14 +80,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             exoPlayer.addMediaItems(Collections.singletonList(mediaItem));
             exoPlayer.prepare();
             exoPlayer.setPlayWhenReady(false);
-
-
         }
 
         catch (Exception ex){
             Log.d("Exoplayer Has Crashed",ex.getMessage().toString());
         }
     }
+
 
     //Checking if the user has liked a video or not
     public void getLikeButtonStatus(final String postKey,final String currentUserId){
@@ -123,3 +124,5 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 
 }
+
+

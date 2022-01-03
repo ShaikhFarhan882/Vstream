@@ -1,11 +1,14 @@
 package com.example.vstream;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -22,9 +25,17 @@ public class Category extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        //Hide Notification Panel
+        /*//Hide Notification Panel
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();*/
+
+        //Setting the Action Bar Color
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#3700B3"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 

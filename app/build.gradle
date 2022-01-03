@@ -53,6 +53,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.13.3'
     implementation 'com.google.android.exoplayer:exoplayer-transformer:2.13.3'
 
+    //CircleImageview Dependency
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 
     //Firebase RecyclerViewAdapter dependency

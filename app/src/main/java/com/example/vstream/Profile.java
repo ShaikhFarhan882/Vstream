@@ -1,35 +1,72 @@
 package com.example.vstream;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 
 public class Profile extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Button Logout;
+    Button UpdateDetails;
+    EditText Username;
+    CircleImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //Hide Notification Panel
+       /* //Hide Notification Panel
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();*/
+
+        //Setting the Action Bar Color
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#3700B3"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        //Typecasting
+        Logout = (Button)findViewById(R.id.logout_Button);
+        UpdateDetails =(Button)findViewById(R.id.update_Profile);
+        Username =(EditText)findViewById(R.id.userName_Profile);
+        profileImage =(CircleImageView)findViewById(R.id.userImage_profile);
+
+
+
+
+
+
+
+
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);
 
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
+        //Bottom navigation bar implementation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,6 +95,22 @@ public class Profile extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+
+        //Implementing the Logout Button
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toasty.success(getApplicationContext(),"Logged Out Successfully",Toasty.LENGTH_SHORT).show();
+                startActivity(new Intent(Profile.this,MainActivity.class));
+                finish();
+            }
+        });
+
+
 
     }
 
