@@ -1,14 +1,21 @@
 package com.example.vstream;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,9 +26,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
@@ -30,10 +59,16 @@ public class Profile extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Button Logout;
-    Button UpdateDetails;
+    Button UpdateButton;
     EditText Username;
     CircleImageView profileImage;
     TextView userEmail;
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
+
+    Uri filepath;
+    Bitmap bitmap;
+    String userID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +88,56 @@ public class Profile extends AppCompatActivity {
 
         //Typecasting
         Logout = (Button)findViewById(R.id.logout_Button);
-        UpdateDetails =(Button)findViewById(R.id.update_Profile);
+        UpdateButton =(Button)findViewById(R.id.update_Profile);
         Username =(EditText)findViewById(R.id.userName_Profile);
         profileImage =(CircleImageView)findViewById(R.id.userImage_profile);
         userEmail =(TextView)findViewById(R.id.emailtv_Profle);
+        databaseReference = FirebaseDatabase.getInstance().getReference("userProfile");
+        storageReference = FirebaseStorage.getInstance().getReference("uploadedProfileImages");
+
+
+        //Fetching the current user to store the image and name related to it.
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
+
+        //Setting the onclick listener on Profile image placeholder
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dexter.withContext(getApplicationContext()).
+                        withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        //Selecting the image from the device storage
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intent,"Please select file"),101);
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                }).check();
+            }
+        });
+
+        UpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateToFirebase();
+
+            }
+        });
+
 
 
 
@@ -124,10 +205,105 @@ public class Profile extends AppCompatActivity {
 
 
 
+    }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==101 && resultCode==RESULT_OK){
+            filepath = data.getData();
+            //Setting the image on placeholder
+            try{
+                InputStream inputStream = getContentResolver().openInputStream(filepath);
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                profileImage.setImageBitmap(bitmap);
 
 
+            }
+            catch (Exception ex){
+                Toasty.error(getApplicationContext(),ex.getMessage(),Toasty.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    public void updateToFirebase(){
+        final ProgressDialog pd=new ProgressDialog(this);
+        pd.setTitle("Uploading");
+        pd.show();
+
+        final StorageReference uploader=storageReference.child("profileimages/"+"img"+System.currentTimeMillis());
+        uploader.putFile(filepath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                final Map<String,Object> map=new HashMap<>();
+                                map.put("uImage",uri.toString());
+                                map.put("uName",Username.getText().toString());
+
+                                databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        //If exists then update
+                                        if(snapshot.exists())
+                                            databaseReference.child(userID).updateChildren(map);
+                                        //Insert if does not exists
+                                        else
+                                            databaseReference.child(userID).setValue(map);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
+
+                                pd.dismiss();
+                                Toasty.success(getApplicationContext(),"Updated Successfully",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        //Calculating the uploaded percentage
+                        float percent=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                        pd.setMessage("Uploaded :"+(int)percent+"%");
+                    }
+                });
+
+    }
+
+    //Displaying the profile image and Name if user has already uploaded it in the app.
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
+        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    //Getting the name form database
+                    Username.setText(snapshot.child("uName").getValue().toString());
+                    //Getting the ImageUrl from database
+                    String imageUrl = (snapshot.child("uImage").getValue().toString());
+                    //Using the glide to display image from URL
+                    Glide.with(getApplicationContext()).load(imageUrl).into(profileImage);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -144,4 +320,6 @@ public class Profile extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
+
 }
