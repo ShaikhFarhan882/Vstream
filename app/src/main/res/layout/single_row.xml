@@ -24,18 +24,19 @@
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
+            android:padding="3dp"
             android:layout_height="230dp"
             android:id="@+id/exoPlayerView"
             android:layout_margin="3dp"
             app:use_controller="true"
             app:resize_mode="fill"
-            android:padding="3dp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"

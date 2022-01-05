@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="671dp"
+        android:layout_height="628dp"
         android:id="@+id/Dashboard_RL">
 
         <androidx.recyclerview.widget.RecyclerView

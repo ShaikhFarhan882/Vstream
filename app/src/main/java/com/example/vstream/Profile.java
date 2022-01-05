@@ -293,8 +293,9 @@ public class Profile extends AppCompatActivity {
                     Username.setText(snapshot.child("uName").getValue().toString());
                     //Getting the ImageUrl from database
                     String imageUrl = (snapshot.child("uImage").getValue().toString());
+
                     //Using the glide to display image from URL
-                    Glide.with(getApplicationContext()).load(imageUrl).into(profileImage);
+                    Glide.with(getApplicationContext()).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(profileImage);
 
                 }
             }

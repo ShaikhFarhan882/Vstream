@@ -83,65 +83,6 @@ public class Dashboard extends AppCompatActivity {
 
 
        //fetching the data from the firebase using firebaseRecycler Adapter
-
-
-
-       //Working with the bottom Navigation Bar
-
-        bottomNavigationView = findViewById(R.id.BottomNavigation);
-
-        bottomNavigationView.setSelectedItemId(R.id.home);
-
-        //Navigation bar Implementation
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                   //Dashboard=Home
-                    case R.id.home:
-                        break;
-
-                    case R.id.category:
-                        Intent intent1 = new Intent(Dashboard.this,Category.class);
-                        startActivity(intent1);
-                        overridePendingTransition(0,0);
-                        finish();
-                        break;
-
-                    case R.id.profile:
-                        Intent intent2 = new Intent(Dashboard.this,Profile.class);
-                        startActivity(intent2);
-                        overridePendingTransition(0,0);
-                        finish();
-                        break;
-
-
-                }
-                return false;
-            }
-        });
-
-
-        //Floating action button to add videos
-        addVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent = new Intent(getApplicationContext(),AddVideo.class);
-              startActivity(intent);
-            }
-        });
-
-
-    }
-    //end of onCreate()
-
-
-    //fetching the data from the firebase using firebaseRecycler Adapter
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         FirebaseRecyclerOptions<Member> options =
                 new FirebaseRecyclerOptions.Builder<Member>()
                         .setQuery(reference, Member.class)
@@ -206,7 +147,60 @@ public class Dashboard extends AppCompatActivity {
 
         firebaseRecyclerAdapter.startListening();
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+
+
+       //Working with the bottom Navigation Bar
+
+        bottomNavigationView = findViewById(R.id.BottomNavigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        //Navigation bar Implementation
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                   //Dashboard=Home
+                    case R.id.home:
+                        break;
+
+                    case R.id.category:
+                        Intent intent1 = new Intent(Dashboard.this,Category.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0,0);
+                        finish();
+                        break;
+
+                    case R.id.profile:
+                        Intent intent2 = new Intent(Dashboard.this,Profile.class);
+                        startActivity(intent2);
+                        overridePendingTransition(0,0);
+                        finish();
+                        break;
+
+
+                }
+                return false;
+            }
+        });
+
+
+        //Floating action button to add videos
+        addVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent intent = new Intent(getApplicationContext(),AddVideo.class);
+              startActivity(intent);
+            }
+        });
+
+
     }
+    //end of onCreate()
+
 
 
 
