@@ -63,10 +63,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:ems="10"
             android:hint="Enter your username"
             android:inputType="text"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            />
 
         <TextView
             android:id="@+id/Email_Banner"
@@ -100,7 +102,8 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/updateButtonColor"
             android:elevation="3dp"
-            android:text="Update" />
+            android:text="Update"
+            />
 
         <Button
             android:id="@+id/logout_Button"

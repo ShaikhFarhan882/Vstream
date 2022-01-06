@@ -57,6 +57,7 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:hint="Email"
+          app:startIconDrawable="@drawable/ic_email"
           android:textColorHint="@color/white">
 
          <com.google.android.material.textfield.TextInputEditText
@@ -71,9 +72,11 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:layout_marginTop="20dp"
+          app:startIconDrawable="@drawable/ic_pwd"
           android:hint="Password"
           android:textColorHint="@color/white"
-          app:passwordToggleEnabled="true">
+          app:passwordToggleEnabled="true"
+          >
 
          <com.google.android.material.textfield.TextInputEditText
              android:layout_width="match_parent"

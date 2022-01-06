@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         t1.getEditText().setText("");
                                         t2.getEditText().setText("");
-                                        Toasty.error(MainActivity.this, "Registration Failed", Toasty.LENGTH_SHORT).show();
+                                        Toasty.error(MainActivity.this, "Registration Failed Existing Email Address", Toasty.LENGTH_SHORT).show();
+
 
                                     }
                                 }
