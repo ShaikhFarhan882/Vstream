@@ -8,17 +8,182 @@
     android:background="@color/white"
     tools:context=".Category">
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="260dp"
-      android:text="Category"
-      android:layout_centerInParent="true"
-      android:textColor="@color/black"
-      android:textSize="40sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="670dp"
+      android:orientation="vertical"
+      android:layout_marginTop="2dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_categorylist"
+        android:drawablePadding="5dp"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Categories"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@color/CategoryBanner"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/categoriesbackground">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="5dp"
+          android:text="Sports"
+          android:textColor="@color/black"
+          android:textStyle="bold"
+          android:textSize="28sp" />
+
+      <Button
+          android:id="@+id/sports_category"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginLeft="5dp"
+          android:backgroundTint="#00000000"
+          android:text="View"
+          android:textColor="@color/white" />
+
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:layout_alignParentRight="true"
+          android:padding="10dp"
+          android:src="@drawable/sports" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/categoriesbackground2">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_marginRight="5dp"
+          android:text="Food"
+          android:textColor="@color/black"
+          android:textStyle="bold"
+          android:textSize="28sp" />
+
+      <Button
+          android:id="@+id/food_category"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginRight="5dp"
+          android:backgroundTint="#00000000"
+          android:text="View"
+          android:textColor="@color/white" />
+
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:layout_alignParentLeft="true"
+          android:padding="10dp"
+          android:src="@drawable/food" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/categoriesbackground3">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="5dp"
+          android:text="Travel"
+          android:textColor="@color/black"
+          android:textStyle="bold"
+          android:textSize="28sp" />
+
+      <Button
+          android:id="@+id/travel_category"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginLeft="5dp"
+          android:backgroundTint="#00000000"
+          android:text="View"
+          android:textColor="@color/white" />
+
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:layout_alignParentRight="true"
+          android:padding="10dp"
+          android:src="@drawable/travel" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/categoriesbackground4">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_marginRight="5dp"
+          android:text="Others"
+          android:textColor="@color/black"
+          android:textStyle="bold"
+          android:textSize="28sp" />
+
+      <Button
+          android:id="@+id/category_other"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginRight="5dp"
+          android:backgroundTint="#00000000"
+          android:text="View"
+          android:textColor="@color/white" />
+
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:layout_alignParentLeft="true"
+          android:padding="10dp"
+          android:src="@drawable/other" />
+    </RelativeLayout>
+
+
+
+
+  </LinearLayout>
+
+
 
 
 

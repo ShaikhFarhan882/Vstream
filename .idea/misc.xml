@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground2.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground3.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground4.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/ic_categorylist.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/ic_dislike.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/ic_email.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/ic_like.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/ic_person.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/selector.xml" value="0.19583333333333333" />
