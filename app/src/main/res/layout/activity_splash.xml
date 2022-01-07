@@ -16,7 +16,8 @@
         android:gravity="center"
         android:text="Vstream"
         android:textColor="@color/white"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:elevation="5dp"/>
 
     <ImageView
         android:layout_width="150dp"
@@ -25,7 +26,8 @@
         android:layout_above="@+id/Vstream_banner"
         android:layout_centerInParent="true"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/splashlogo" />
+        android:src="@drawable/splashlogo"
+        android:elevation="8dp"/>
 
     <TextView
         android:layout_width="match_parent"

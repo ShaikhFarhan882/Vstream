@@ -23,7 +23,8 @@
             android:text="Profile Image"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:elevation="5dp"/>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -44,59 +45,65 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            app:cardBackgroundColor="#FFECB3"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="100dp"
-            android:drawableStart="@drawable/ic_person"
-            android:drawablePadding="5dp"
-            android:fontFamily="sans-serif"
-            android:text="Username"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/userName_Profile"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Enter your username"
-            android:inputType="text"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            <EditText
+                android:id="@+id/userName_Profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:ems="10"
+                android:hint="Enter your username"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
 
-        <TextView
-            android:id="@+id/Email_Banner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="120dp"
-            android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="5dp"
-            android:fontFamily="sans-serif"
-            android:text="Email"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/Email_Banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/emailtv_Profle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif"
-            android:text="xyz@gmail.com"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/emailtv_Profle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="140dp"
+                android:fontFamily="sans-serif"
+                android:text="xyz@gmail.com"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+        </androidx.cardview.widget.CardView>
 
 
         <Button
@@ -104,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/updateButtonColor"
             android:elevation="3dp"
             android:text="Update" />
@@ -120,6 +127,7 @@
             android:text="Logout" />
 
 
+
     </LinearLayout>
 
 
@@ -133,6 +141,8 @@
         app:itemTextColor="@color/white"
         app:itemIconTint="@drawable/selector"
         app:menu="@menu/menu_navigation"/>
+
+
 
 
 

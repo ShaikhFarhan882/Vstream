@@ -28,11 +28,13 @@
         android:textAllCaps="true"
         android:textColor="@color/CategoryBanner"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:elevation="8dp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
@@ -46,7 +48,8 @@
           android:text="Sports"
           android:textColor="@color/black"
           android:textStyle="bold"
-          android:textSize="28sp" />
+          android:textSize="28sp"
+          android:elevation="6dp"/>
 
       <Button
           android:id="@+id/sports_category"
@@ -64,12 +67,15 @@
           android:layout_height="120dp"
           android:layout_alignParentRight="true"
           android:padding="10dp"
-          android:src="@drawable/sports" />
+          android:src="@drawable/sports"
+          android:elevation="2dp"
+          />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
@@ -83,7 +89,8 @@
           android:text="Food"
           android:textColor="@color/black"
           android:textStyle="bold"
-          android:textSize="28sp" />
+          android:textSize="28sp"
+          android:elevation="6dp"/>
 
       <Button
           android:id="@+id/food_category"
@@ -101,12 +108,13 @@
           android:layout_height="120dp"
           android:layout_alignParentLeft="true"
           android:padding="10dp"
-          android:src="@drawable/food" />
+          android:src="@drawable/food"
+          android:elevation="2dp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
@@ -120,7 +128,8 @@
           android:text="Travel"
           android:textColor="@color/black"
           android:textStyle="bold"
-          android:textSize="28sp" />
+          android:textSize="28sp"
+          android:elevation="6dp"/>
 
       <Button
           android:id="@+id/travel_category"
@@ -138,12 +147,13 @@
           android:layout_height="120dp"
           android:layout_alignParentRight="true"
           android:padding="10dp"
-          android:src="@drawable/travel" />
+          android:src="@drawable/travel"
+          android:elevation="2dp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
@@ -157,7 +167,8 @@
           android:text="Others"
           android:textColor="@color/black"
           android:textStyle="bold"
-          android:textSize="28sp" />
+          android:textSize="28sp"
+          android:elevation="6dp"/>
 
       <Button
           android:id="@+id/category_other"
@@ -175,7 +186,8 @@
           android:layout_height="120dp"
           android:layout_alignParentLeft="true"
           android:padding="10dp"
-          android:src="@drawable/other" />
+          android:src="@drawable/other"
+          android:elevation="2dp"/>
     </RelativeLayout>
 
 
@@ -199,3 +211,4 @@
 
 
 </RelativeLayout>
+
