@@ -83,7 +83,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textPassword"
+                android:maxLength="25"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -113,6 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
         android:text="Forgot Password?"
+        android:alpha="0.8"
         android:textColor="#ff0000"
         android:textSize="18sp"
         android:fontFamily="sans-serif"
@@ -126,6 +128,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="104dp"
+        android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

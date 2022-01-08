@@ -13,6 +13,7 @@
     <color name="VideoPreview">#F44336</color>
     <color name="LikeButtonColor">#E94057</color>
     <color name="LogoutButtonColor">#E94057</color>
-    <color name="updateButtonColor">#B24BF3</color>
+    <color name="updateButtonColor">#66F9B0</color>
     <color name="CategoryBanner">#FFB74D</color>
+    <color name="LoginTv">#F44336</color>
 </resources>

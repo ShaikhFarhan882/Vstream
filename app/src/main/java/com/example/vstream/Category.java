@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Category extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Button sports, food, travel, others;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,53 @@ public class Category extends AppCompatActivity {
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#3700B3"));
         actionBar.setBackgroundDrawable(colorDrawable);
+
+
+        //Typecasting
+        sports = (Button)findViewById(R.id.sports_category);
+        food = (Button)findViewById(R.id.food_category);
+        travel = (Button)findViewById(R.id.travel_category);
+        others = (Button)findViewById(R.id.other_category);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         bottomNavigationView = findViewById(R.id.BottomNavigation);

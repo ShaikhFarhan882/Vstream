@@ -171,7 +171,7 @@
           android:elevation="6dp"/>
 
       <Button
-          android:id="@+id/category_other"
+          android:id="@+id/other_category"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"

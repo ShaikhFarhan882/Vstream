@@ -74,6 +74,7 @@
                 android:ems="10"
                 android:hint="Enter your username"
                 android:inputType="text"
+                android:maxLength="20"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
