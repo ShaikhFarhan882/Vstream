@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Comment"
+    android:orientation="vertical"
     android:background="@color/white">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:textSize="22sp"
             android:textColor="@color/black"
             android:fontFamily="sans-serif"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             />
 
         <EditText
@@ -29,6 +30,7 @@
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:hint="Enter comment here"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -46,7 +48,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
                 android:text="Cancel"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
                 android:elevation="4dp"/>
 
             <Button
@@ -56,6 +61,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
                 android:text="submit"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
                 android:elevation="4dp"
                 />
 
@@ -63,6 +70,19 @@
 
 
     </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginTop="20dp"
+       android:orientation="vertical">
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/Comment_recview"/>
+
+   </LinearLayout>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
