@@ -132,6 +132,18 @@ public class Dashboard extends AppCompatActivity {
                 });
 
 
+               //If user clicks on the comment button
+                holder.comment_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(),Comment.class);
+                        intent.putExtra("postkey", postKey);
+                        startActivity(intent);
+
+                    }
+                });
+
+
                 //Setting the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
             }

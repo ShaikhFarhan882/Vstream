@@ -84,7 +84,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:inputType="textPassword"
-             android:maxLength="25"/>
+             android:maxLength="25" />
       </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -148,5 +148,18 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent"
        android:src="@drawable/register"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Vstream"
+       android:textColor="@color/white"
+       android:textSize="16sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.96" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

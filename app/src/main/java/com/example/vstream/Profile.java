@@ -82,6 +82,7 @@ public class Profile extends AppCompatActivity {
         //Setting the Action Bar Color
         ActionBar actionBar;
         actionBar = getSupportActionBar();
+        actionBar.setTitle("Profile");
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#3700B3"));
         actionBar.setBackgroundDrawable(colorDrawable);
