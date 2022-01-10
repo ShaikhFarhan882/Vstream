@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="@color/white">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="15dp">
+
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/comment_image"
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_alignParentLeft="true"
+          android:src="@color/SailorBlue"/>
+
+      <TextView
+          android:id="@+id/comment_username"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="110dp"
+          android:text="Username"
+          android:textColor="@color/black"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/comment_message"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/comment_username"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="5dp"
+          android:layout_toRightOf="@+id/comment_image"
+          android:fontFamily="sans-serif"
+          android:text="User Comment"
+          android:textColor="@color/black"
+          android:textSize="20sp" />
+
+      <TextView
+          android:id="@+id/comment_dateTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_below="@id/comment_message"
+          android:layout_alignParentRight="true"
+          android:text="Date and Time"
+          android:textColor="@color/black"
+          android:textSize="15sp"
+          />
+
+  </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

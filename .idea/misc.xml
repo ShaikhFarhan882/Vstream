@@ -7,6 +7,7 @@
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground2.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground3.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/categoriesbackground4.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/comment_bg.xml" value="0.19282051282051282" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/custom_button_profile.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/custom_button_profile_logout.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/drawable/emailbackground.xml" value="0.19583333333333333" />
@@ -27,6 +28,8 @@
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/layout/activity_profile.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/layout/single_row.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/layout/single_row_comment.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/layout/single_row_dashboard.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/menu/menu_navigation.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/FARHAN/AndroidStudioProjects/Vstream/app/src/main/res/menu/menu_search.xml" value="0.1796875" />
       </map>

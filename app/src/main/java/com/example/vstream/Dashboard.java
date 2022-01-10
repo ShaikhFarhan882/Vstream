@@ -19,9 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,8 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 
@@ -152,7 +147,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.single_row,parent,false);
+                        .inflate(R.layout.single_row_dashboard,parent,false);
                 return new ViewHolder(view);
             }
         };
@@ -293,7 +288,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.single_row,parent,false);
+                        .inflate(R.layout.single_row_dashboard,parent,false);
                 return new ViewHolder(view);
             }
         };
