@@ -32,6 +32,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="120dp"
         android:src="@drawable/ic_addvideo"
+        android:tooltipText="Add Video"
         />
 
 

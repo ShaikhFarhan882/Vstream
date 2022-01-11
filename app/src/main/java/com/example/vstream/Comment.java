@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +81,8 @@ public class Comment extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+
+
         //Submit button Implementation
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +104,7 @@ public class Comment extends AppCompatActivity {
 
                     }
                 });
+
             }
             private void processComment(String userName, String userImage){
                 String submittedText = CommentText.getText().toString();
@@ -141,6 +146,15 @@ public class Comment extends AppCompatActivity {
                 });
 
 
+            }
+
+        });
+
+        //Cancel Button Implementation
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommentText.setText("");
             }
         });
 

@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vstream">
         <activity
+            android:name=".CategoryFour"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryThree"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryTwo"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryOne"
+            android:exported="false" />
+        <activity
             android:name=".Comment"
             android:exported="false" />
         <activity

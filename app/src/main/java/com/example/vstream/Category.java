@@ -11,11 +11,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import es.dmoral.toasty.Toasty;
 
 public class Category extends AppCompatActivity {
 
@@ -46,43 +49,43 @@ public class Category extends AppCompatActivity {
         travel = (Button)findViewById(R.id.travel_category);
         others = (Button)findViewById(R.id.other_category);
 
+        sports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Category.this,CategoryOne.class);
+                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
+                startActivity(intent);
 
+            }
+        });
 
+        food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Category.this,CategoryTwo.class);
+                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
+                startActivity(intent);
 
+            }
+        });
 
+        travel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Category.this,CategoryThree.class);
+                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        others.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Category.this,CategoryFour.class);
+                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -117,6 +120,7 @@ public class Category extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
     @Override
@@ -132,4 +136,5 @@ public class Category extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
 }
