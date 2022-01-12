@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/white"
     tools:context=".Profile">
 
 
@@ -19,12 +19,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:elevation="5dp"
             android:fontFamily="sans-serif"
             android:text="Profile Image"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:elevation="5dp"/>
+            android:textStyle="bold" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -51,7 +51,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            app:cardBackgroundColor="#FFECB3"
+            app:cardBackgroundColor="#99A3C7"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp">
 
@@ -115,7 +115,8 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/updateButtonColor"
             android:elevation="3dp"
-            android:text="Update" />
+            android:text="Update"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/logout_Button"
@@ -125,8 +126,8 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/LogoutButtonColor"
             android:elevation="3dp"
-            android:text="Logout" />
-
+            android:text="Logout"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>

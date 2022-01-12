@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C2C2C"
+    android:background="#3D3B3B"
     tools:context=".AddVideo">
 
 
@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/Video_title"
-        android:layout_width="290dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:hint="Enter Title"
         android:textColorHint="@color/white"
@@ -64,39 +64,44 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.552"
+        android:maxLength="30"/>
 
     <Button
         android:id="@+id/browse_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:backgroundTint="@color/BrowseButton"
+        android:elevation="6dp"
         android:text="Browse"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintVertical_bias="0.808" />
 
     <Button
         android:id="@+id/upload_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/UploadButton"
+        android:elevation="6dp"
         android:text="Upload"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:elevation="3dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintVertical_bias="0.808" />
 
     <RadioGroup
         android:id="@+id/category_radiogroup"
@@ -115,6 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:elevation="3dp"
             android:text="Sports"
             android:textColor="@color/white"
             android:onClick="Checkbutton"/>
@@ -124,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:elevation="3dp"
             android:text="Food"
             android:textColor="@color/white"
             android:onClick="Checkbutton"/>
@@ -133,6 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:elevation="3dp"
             android:text="Travel"
             android:textColor="@color/white"
             android:onClick="Checkbutton"/>
@@ -142,6 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:elevation="3dp"
             android:text="Other"
             android:textColor="@color/white"
             android:onClick="Checkbutton"/>

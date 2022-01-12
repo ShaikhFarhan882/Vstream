@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:padding="5dp"
-        android:background="@drawable/comment_bg">
+        android:background="@drawable/addcomment_bg">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,6 +24,7 @@
             android:textColor="@color/black"
             android:fontFamily="sans-serif"
             android:layout_marginLeft="10dp"
+            android:textStyle="italic"
             />
 
         <EditText

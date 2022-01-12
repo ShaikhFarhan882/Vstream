@@ -6,7 +6,7 @@
     android:background="@color/white"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
-    android:backgroundTint="@color/white">
+    android:backgroundTint="#D7D7D7">
 
   <RelativeLayout
       android:layout_width="match_parent"
