@@ -321,13 +321,19 @@ public class Dashboard extends AppCompatActivity {
                 return false;
             }
         });
+
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
-
-
+    //Selecting options in menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settings_app:
+                Toasty.success(getApplicationContext(),"Clicked",Toasty.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
 

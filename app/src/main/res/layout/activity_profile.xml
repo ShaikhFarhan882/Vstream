@@ -58,6 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="10dp"
                 android:fontFamily="sans-serif"
@@ -82,6 +83,7 @@
                 android:id="@+id/Email_Banner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="100dp"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
@@ -116,7 +118,7 @@
             android:backgroundTint="@color/updateButtonColor"
             android:elevation="3dp"
             android:text="Update"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/logout_Button"
@@ -127,7 +129,7 @@
             android:backgroundTint="@color/LogoutButtonColor"
             android:elevation="3dp"
             android:text="Logout"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
 
     </LinearLayout>

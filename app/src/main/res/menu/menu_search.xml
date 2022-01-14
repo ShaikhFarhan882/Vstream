@@ -8,7 +8,7 @@
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-    <item android:id="@+id/exo_settings"
+    <item android:id="@+id/settings_app"
         android:title="Settings"
         />
 

@@ -69,11 +69,10 @@ public class Login extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }
-
+                                    //if user enters incorrect password
                                     else {
-                                        t1.getEditText().setText("");
                                         t2.getEditText().setText("");
-                                        Toasty.warning(Login.this, "Login Failed", Toasty.LENGTH_SHORT).show();
+                                        Toasty.warning(Login.this, "Login Failed Incorrect Password", Toasty.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -90,6 +89,7 @@ public class Login extends AppCompatActivity {
                     t1.getEditText().setText("");
                     t2.getEditText().setText("");
                     Toasty.warning(Login.this, "Invalid Email or Password", Toasty.LENGTH_SHORT).show();
+
 
                 }
 
