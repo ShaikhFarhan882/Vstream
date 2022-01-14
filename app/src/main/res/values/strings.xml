@@ -6,4 +6,14 @@
         <item>Travel</item>
         <item>Food</item>
     </string-array>
+
+    <string name="AboutApp">
+        Vstream – Video Streaming application which is a video streaming application based on the android platform.
+The system aims to create a healthy and collaborative space.
+Users can view content based on their choice and upload the desired content to the application for other user sake.
+The developed system also provides features for expressing their acceptance in form of like button.
+It also provides the users to showcase their thoughts and views in the form of comment section.
+Users can find a specific video using the search option and users can also explore various different categories of videos available over the application.
+</string>
+    <string name="Myname">Farhan Iftekhar Shaikh</string>
 </resources>

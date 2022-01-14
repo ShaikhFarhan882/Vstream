@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vstream">
         <activity
+            android:name=".AboutApp"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".CategoryFour"
             android:exported="false" />
         <activity

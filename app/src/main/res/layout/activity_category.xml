@@ -45,11 +45,12 @@
           android:layout_height="wrap_content"
           android:layout_alignParentLeft="true"
           android:layout_marginLeft="5dp"
+          android:elevation="6dp"
+          android:padding="5dp"
           android:text="Sports"
           android:textColor="@color/black"
-          android:textStyle="bold"
           android:textSize="28sp"
-          android:elevation="6dp"/>
+          android:textStyle="bold" />
 
       <Button
           android:id="@+id/sports_category"
@@ -60,7 +61,8 @@
           android:layout_marginLeft="5dp"
           android:backgroundTint="#00000000"
           android:text="View"
-          android:textColor="@color/white" />
+          android:textColor="@color/white"
+          />
 
       <ImageView
           android:layout_width="120dp"
@@ -86,6 +88,7 @@
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"
           android:layout_marginRight="5dp"
+          android:padding="5dp"
           android:text="Food"
           android:textColor="@color/black"
           android:textStyle="bold"
@@ -125,6 +128,7 @@
           android:layout_height="wrap_content"
           android:layout_alignParentLeft="true"
           android:layout_marginLeft="5dp"
+          android:padding="5dp"
           android:text="Travel"
           android:textColor="@color/black"
           android:textStyle="bold"
@@ -164,6 +168,7 @@
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"
           android:layout_marginRight="5dp"
+          android:padding="5dp"
           android:text="Others"
           android:textColor="@color/black"
           android:textStyle="bold"

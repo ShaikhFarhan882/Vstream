@@ -330,7 +330,7 @@ public class Dashboard extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.settings_app:
-                Toasty.success(getApplicationContext(),"Clicked",Toasty.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),SettingActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

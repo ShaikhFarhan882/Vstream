@@ -17,4 +17,5 @@
     <color name="CategoryBanner">#FFB74D</color>
     <color name="LoginTv">#F44336</color>
     <color name="SailorBlue">#296c92</color>
+    <color name="categoryTextColor">#379AD3</color>
 </resources>
