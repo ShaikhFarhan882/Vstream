@@ -24,6 +24,7 @@
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
+            android:background="@drawable/video_border"
             android:padding="3dp"
             android:layout_height="230dp"
             android:id="@+id/exoPlayerView"

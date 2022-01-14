@@ -70,12 +70,16 @@
             <EditText
                 android:id="@+id/userName_Profile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_black_bg"
                 android:ems="10"
                 android:hint="Enter your username"
                 android:inputType="text"
                 android:maxLength="20"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 

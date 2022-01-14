@@ -27,6 +27,7 @@
 
     <VideoView
         android:id="@+id/videoView"
+        android:background="@drawable/video_border"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginRight="20dp"
@@ -55,7 +56,9 @@
     <EditText
         android:id="@+id/Video_title"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_white_bg"
         android:hint="Enter Title"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
@@ -107,6 +110,7 @@
         android:id="@+id/category_radiogroup"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/edittext_white_bg"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.54"

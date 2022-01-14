@@ -29,10 +29,13 @@
 
         <EditText
             android:id="@+id/comment_box"
-            android:layout_width="365dp"
-            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_black_bg"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
             android:hint="Enter comment here"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
