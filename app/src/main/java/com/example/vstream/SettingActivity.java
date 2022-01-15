@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -18,8 +20,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseCommonRegistrar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,9 +36,6 @@ public class SettingActivity extends AppCompatActivity {
     TextView change_password;
     TextView aboutApp;
     FirebaseAuth mAuth;
-    EditText currentPassword;
-    EditText newPassword;
-    Button updatePwd;
 
 
     @Override
@@ -69,10 +72,77 @@ public class SettingActivity extends AppCompatActivity {
         change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toasty.success(getApplicationContext(),"Chala",Toasty.LENGTH_SHORT).show();
-
+                showDialog();
             }
         });
+
+
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(SettingActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_change_password);
+
+        //Typecasting
+        final EditText currentPassword = (EditText) dialog.findViewById(R.id.dialog_current_password);
+        final EditText newPassword = (EditText) dialog.findViewById(R.id.dialog_new_password);
+        final Button changePwd = (Button) dialog.findViewById(R.id.update_password);
+        //Update button implementation
+        changePwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldPwd = currentPassword.getText().toString().trim();
+                String newPwd = newPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(oldPwd)){
+                    Toasty.warning(getApplicationContext(),"Please Enter Current Password",Toasty.LENGTH_SHORT).show();
+                    return;
+                }
+                if(newPassword.length()<8){
+                    Toasty.warning(getApplicationContext(),"Password must be at least 8 characters",Toasty.LENGTH_SHORT).show();
+                    return;
+                }
+                upadatePassword(oldPwd,newPwd,dialog);
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    private void upadatePassword(String oldPwd, String newPwd,Dialog dialog) {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        AuthCredential authCredential = EmailAuthProvider.getCredential(user.getEmail(),oldPwd);
+
+
+        user.reauthenticate(authCredential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            user.updatePassword(newPwd).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toasty.success(getApplicationContext(),"Password Updated Successfully",Toasty.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+
+                                    } else {
+                                        Toasty.success(getApplicationContext(),"Failec to update password",Toasty.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+                                }
+                            });
+                        } else {
+                            Toasty.success(getApplicationContext(),"Failed to authenticate user",Toasty.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    }
+                });
 
 
     }
