@@ -105,7 +105,7 @@ public class Dashboard extends AppCompatActivity {
                                 if(likeStatus==true){
 
                                     if(snapshot.child(postKey).hasChild(currentUserID)){
-                                        likeReference.child(postKey).removeValue();
+                                        likeReference.child(postKey).child(currentUserID).removeValue();
                                         likeStatus = false;
                                     }
                                     else{
@@ -260,7 +260,7 @@ public class Dashboard extends AppCompatActivity {
                                 if(likeStatus==true){
 
                                     if(snapshot.child(postKey).hasChild(currentUserID)){
-                                        likeReference.child(postKey).removeValue();
+                                        likeReference.child(postKey).child(currentUserID).removeValue();
                                         likeStatus = false;
                                     }
                                     else{

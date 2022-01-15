@@ -2,13 +2,19 @@ package com.example.vstream;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +30,9 @@ public class SettingActivity extends AppCompatActivity {
     TextView change_password;
     TextView aboutApp;
     FirebaseAuth mAuth;
+    EditText currentPassword;
+    EditText newPassword;
+    Button updatePwd;
 
 
     @Override
@@ -45,6 +54,8 @@ public class SettingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+
+
        //About the app
        aboutApp.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -58,30 +69,13 @@ public class SettingActivity extends AppCompatActivity {
         change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    mAuth.sendPasswordResetEmail(user)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toasty.success(getApplicationContext(),"Change Password Link Send Successfully",Toasty.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        Toasty.error(getApplicationContext(),"Failed to Send Password Reset Link",Toasty.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                Toasty.success(getApplicationContext(),"Chala",Toasty.LENGTH_SHORT).show();
 
             }
         });
 
 
-
-
-
-
-
-
     }
+
+
 }
