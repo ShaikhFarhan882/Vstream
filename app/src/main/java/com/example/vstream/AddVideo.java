@@ -22,6 +22,8 @@ import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -54,6 +56,10 @@ public class AddVideo extends AppCompatActivity {
     StorageReference storageReference;
     DatabaseReference databaseReference;
 
+    //Getting the user Unique ID
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String currentUserId = user.getUid();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,7 @@ public class AddVideo extends AppCompatActivity {
         //Storage and Realtime database Initializing
         storageReference = FirebaseStorage.getInstance().getReference("uploadedVideo");
         databaseReference = FirebaseDatabase.getInstance().getReference("video");
+
 
 
 
@@ -177,7 +184,7 @@ public class AddVideo extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     //Realtime database
-                                    Member obj = new Member(videoTitle.getText().toString(),uri.toString(),radioButton.getText().toString());
+                                    Member obj = new Member(videoTitle.getText().toString(),uri.toString(),radioButton.getText().toString(),currentUserId);
                                     databaseReference.child(databaseReference.push().getKey()).setValue(obj)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override

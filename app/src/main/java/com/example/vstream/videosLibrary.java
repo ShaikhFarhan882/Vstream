@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import es.dmoral.toasty.Toasty;
 
-public class CategoryOne extends AppCompatActivity {
+public class videosLibrary extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
@@ -37,17 +37,17 @@ public class CategoryOne extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_one);
+        setContentView(R.layout.activity_videos_library);
 
         //Setting the Action Bar Color
         ActionBar actionBar;
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Sports");
+        actionBar.setTitle("Your Uploaded Videos");
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#3700B3"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
-        recyclerView = (RecyclerView)findViewById(R.id.catOne_RV);
+        recyclerView = (RecyclerView)findViewById(R.id.videosLibrary_RV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -56,11 +56,14 @@ public class CategoryOne extends AppCompatActivity {
 
 
 
+        //Fetching the Video based on the userID
 
-        //Fetching the Video based on the category
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userID = user.getUid();
 
-        String query = "Sports";
-        Query firebaseQuery = databaseReference.orderByChild("videoCategory").startAt(query).endAt(query + "\uf8ff");
+        String query = userID;
+
+        Query firebaseQuery = databaseReference.orderByChild("currentUserId").startAt(query).endAt(query + "\uf8ff");
 
         FirebaseRecyclerOptions<Member> options =
                 new FirebaseRecyclerOptions.Builder<Member>()
@@ -135,6 +138,7 @@ public class CategoryOne extends AppCompatActivity {
 
         firebaseRecyclerAdapter.startListening();
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
     }
 }
-

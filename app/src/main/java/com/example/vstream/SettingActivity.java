@@ -35,6 +35,7 @@ import es.dmoral.toasty.Toasty;
 public class SettingActivity extends AppCompatActivity {
     TextView change_password;
     TextView aboutApp;
+    TextView yourVideos;
     FirebaseAuth mAuth;
 
 
@@ -54,7 +55,9 @@ public class SettingActivity extends AppCompatActivity {
 
         change_password = (TextView) findViewById(R.id.change_pwd);
         aboutApp = (TextView) findViewById(R.id.about_app);
+        yourVideos = (TextView) findViewById(R.id.your_videos_library);
         mAuth = FirebaseAuth.getInstance();
+
 
 
 
@@ -73,6 +76,15 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog();
+            }
+        });
+
+        //Showing all the videos uploaded by the user
+        yourVideos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),videosLibrary.class));
+
             }
         });
 
