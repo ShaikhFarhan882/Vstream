@@ -9,10 +9,13 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -205,6 +208,16 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
+        //Checking if the user is connected to internet or not with isOnline function
+        if (!isOnline()){
+            Toasty.error(getApplicationContext(), "Network connection is not Available", Toasty.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(), "Unable to Load Videos", Toasty.LENGTH_SHORT).show();
+        }
+
+
+
+
+
     }
     //end of onCreate()
 
@@ -334,6 +347,20 @@ public class Dashboard extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //Checking if the application is connected to the internet or not
+    boolean status;
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
 
 

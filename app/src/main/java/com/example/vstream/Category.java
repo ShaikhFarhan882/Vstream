@@ -53,7 +53,6 @@ public class Category extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Category.this,CategoryOne.class);
-                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
                 startActivity(intent);
 
             }
@@ -63,7 +62,6 @@ public class Category extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Category.this,CategoryTwo.class);
-                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
                 startActivity(intent);
 
             }
@@ -73,7 +71,6 @@ public class Category extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Category.this,CategoryThree.class);
-                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -82,7 +79,6 @@ public class Category extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Category.this,CategoryFour.class);
-                Toasty.success(getApplicationContext(),"Related Results",Toasty.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

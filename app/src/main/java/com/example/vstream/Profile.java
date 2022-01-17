@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -204,6 +207,12 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //Checking if the user is connected to internet or not with isOnline function
+        if (!isOnline()){
+            Toasty.error(getApplicationContext(), "Network connection is not Available", Toasty.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(), "Unable to View/Update Profile", Toasty.LENGTH_SHORT).show();
+        }
+
 
 
     }
@@ -322,6 +331,22 @@ public class Profile extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
+
+
+    //Checking if the application is connected to the internet or not
+    boolean status;
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 
 }
