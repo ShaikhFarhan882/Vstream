@@ -12,5 +12,10 @@
         android:title="Settings"
         />
 
+    <item android:id="@+id/share_app"
+        android:title="Share this App"
+        />
+
+
 
 </menu>

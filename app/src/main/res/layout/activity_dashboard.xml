@@ -14,9 +14,9 @@
         android:id="@+id/Dashboard_RL">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Dashboard_RV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/Dashboard_RV">
+            android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -31,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="120dp"
+        android:backgroundTint="@color/fab"
         android:src="@drawable/ic_addvideo"
         android:tooltipText="Add Video"
         />
@@ -48,3 +49,5 @@
 
 
 </RelativeLayout>
+
+
