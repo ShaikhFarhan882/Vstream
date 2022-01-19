@@ -208,13 +208,11 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        //Checking if the user is connected to internet or not with isOnline function
+        //Checking if the user is connected to internet or not with isOnline function.
         if (!isOnline()){
             Toasty.error(getApplicationContext(), "Network connection is not Available", Toasty.LENGTH_SHORT).show();
             Toasty.error(getApplicationContext(), "Unable to Load Videos", Toasty.LENGTH_SHORT).show();
         }
-
-
 
 
 
@@ -345,22 +343,10 @@ public class Dashboard extends AppCompatActivity {
             case R.id.settings_app:
                 startActivity(new Intent(getApplicationContext(),SettingActivity.class));
 
-            case R.id.share_app:
-                shareApplication();
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    //Update the application hosted link when the new version is available
-    private void shareApplication() {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT,
-                "Hey check out my app at: https://drive.google.com/file/d/1Hzl6RwWJNVLXzCs5UBYhsVMNDnmCT5w6/view?usp=sharing");
-                sendIntent.setType("text/plain");
-        startActivity(Intent.createChooser(sendIntent, "Choose one"));
-    }
 
 
     //Checking if the application is connected to the internet or not

@@ -36,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     TextView change_password;
     TextView aboutApp;
     TextView yourVideos;
+    TextView shareApp;
     FirebaseAuth mAuth;
 
 
@@ -56,6 +57,7 @@ public class SettingActivity extends AppCompatActivity {
         change_password = (TextView) findViewById(R.id.change_pwd);
         aboutApp = (TextView) findViewById(R.id.about_app);
         yourVideos = (TextView) findViewById(R.id.your_videos_library);
+        shareApp = (TextView) findViewById(R.id.share_app);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -87,6 +89,21 @@ public class SettingActivity extends AppCompatActivity {
 
             }
         });
+
+        //sharing the application when user taps this button
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey check out my app at: https://drive.google.com/file/d/1Hzl6RwWJNVLXzCs5UBYhsVMNDnmCT5w6/view?usp=sharing");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Choose one"));
+            }
+        });
+
+
 
 
     }

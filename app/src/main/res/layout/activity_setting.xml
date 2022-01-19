@@ -63,6 +63,30 @@ w
 
         </RelativeLayout>
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_black_bg"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/share_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_share_app"
+                android:drawablePadding="20dp"
+                android:fontFamily="sans-serif"
+                android:paddingStart="10dp"
+                android:text="Share this App"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
