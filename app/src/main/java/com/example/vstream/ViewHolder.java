@@ -50,6 +50,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     SimpleExoPlayer exoPlayer;
     ImageView like_btn;
     ImageView comment_btn;
+    ImageView share_btn;
     TextView like_text;
     DatabaseReference likeReference;
 
@@ -60,6 +61,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         like_btn = itemView.findViewById(R.id.like_button);
         like_text = itemView.findViewById(R.id.likes_textview);
         comment_btn = itemView.findViewById(R.id.comment_button);
+        share_btn = itemView.findViewById(R.id.share_button);
 
     }
 

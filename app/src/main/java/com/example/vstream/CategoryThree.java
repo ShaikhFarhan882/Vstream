@@ -76,6 +76,10 @@ public class CategoryThree extends AppCompatActivity {
                 final String postKey = getRef(position).getKey();
                 holder.getLikeButtonStatus(postKey,currentUserID);
 
+
+                //getting VideoUrl for shareButton
+                final String shareVideoUrl = getItem(position).getVideoURL();
+
                 //If user clicks on the like button;
                 holder.like_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -119,6 +123,20 @@ public class CategoryThree extends AppCompatActivity {
 
                     }
                 });
+
+
+
+                //If users clicks on the share Button
+                holder.share_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareVideoUrl);
+                        shareIntent.setType("text/plain");
+                        startActivity(Intent.createChooser(shareIntent, "Choose one"));
+                    }
+                });
+
 
                 //Setting up the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
