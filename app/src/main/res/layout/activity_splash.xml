@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:elevation="5dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="Vstream"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        android:elevation="5dp"/>
+        android:textSize="40sp" />
 
     <ImageView
         android:layout_width="150dp"
@@ -30,18 +30,17 @@
         android:elevation="8dp"/>
 
     <TextView
-        android:layout_width="match_parent"
         android:id="@+id/Vstream_slogan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A Streaming Platform"
-        android:textColor="@color/white"
-        android:fontFamily="sans-serif-black"
-        android:textSize="20sp"
-        android:layout_centerInParent="true"
         android:layout_below="@+id/Vstream_banner"
-        android:layout_marginRight="50dp"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:fontFamily="sans-serif-black"
+        android:text="A Streaming Platform"
         android:textAlignment="center"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </RelativeLayout>

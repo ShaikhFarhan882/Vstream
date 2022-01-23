@@ -20,6 +20,7 @@
         android:layout_margin="10dp">
 
         <TextView
+            android:id="@+id/about_app_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/AboutApp"
@@ -43,16 +44,17 @@
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/dev_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Myname"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="50dp"
+        android:text="@string/Myname"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
