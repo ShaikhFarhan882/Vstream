@@ -15,8 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +41,7 @@ public class SettingActivity extends AppCompatActivity {
     TextView yourVideos;
     TextView shareApp;
     FirebaseAuth mAuth;
+    Animation bottomAnim;
 
 
     @Override
@@ -60,6 +64,16 @@ public class SettingActivity extends AppCompatActivity {
         shareApp = (TextView) findViewById(R.id.share_app);
         mAuth = FirebaseAuth.getInstance();
 
+
+
+        //Initializing the animation
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+
+        //Hooking the animations
+        yourVideos.setAnimation(bottomAnim);
+        change_password.setAnimation(bottomAnim);
+        shareApp.setAnimation(bottomAnim);
+        aboutApp.setAnimation(bottomAnim);
 
 
 

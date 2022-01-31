@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/profileuibg"
     tools:context=".Profile">
 
 
@@ -21,9 +21,10 @@
             android:layout_marginTop="10dp"
             android:elevation="5dp"
             android:fontFamily="sans-serif"
-            android:text="Profile Image"
+            android:text="Profile Photo"
+            android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
 
