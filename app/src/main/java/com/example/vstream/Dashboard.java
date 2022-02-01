@@ -157,6 +157,9 @@ public class Dashboard extends AppCompatActivity {
                     }
                 });
 
+                //Hiding the delete Button
+                holder.delete_btn.setVisibility(View.INVISIBLE);
+
 
                 //Setting the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
@@ -323,7 +326,10 @@ public class Dashboard extends AppCompatActivity {
                     }
                 });
 
+                //Hiding the delete Button
+                holder.delete_btn.setVisibility(View.INVISIBLE);
 
+               //setting up the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
             }
 

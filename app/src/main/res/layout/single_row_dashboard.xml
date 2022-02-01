@@ -10,6 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_button"
+            android:src="@drawable/ic_delete"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="320dp"
+            android:tooltipText="Delete video"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -21,6 +37,7 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:id="@+id/dashboardVideoTitle"/>
+
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
@@ -72,6 +89,7 @@
                 android:layout_marginLeft="90dp"
                 android:tooltipText="Share Link"
                 />
+
 
 
 

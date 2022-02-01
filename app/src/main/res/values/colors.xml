@@ -19,4 +19,5 @@
     <color name="SailorBlue">#296c92</color>
     <color name="categoryTextColor">#379AD3</color>
     <color name="fab">#FFEB3B</color>
+    <color name="deleteButton">#399cbd</color>
 </resources>

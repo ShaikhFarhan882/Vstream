@@ -51,6 +51,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView like_btn;
     ImageView comment_btn;
     ImageView share_btn;
+    ImageView delete_btn;
     TextView like_text;
     DatabaseReference likeReference;
 
@@ -62,6 +63,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         like_text = itemView.findViewById(R.id.likes_textview);
         comment_btn = itemView.findViewById(R.id.comment_button);
         share_btn = itemView.findViewById(R.id.share_button);
+        delete_btn = itemView.findViewById(R.id.delete_button);
+
 
     }
 
@@ -125,6 +128,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 
     }
+
 
 
 }

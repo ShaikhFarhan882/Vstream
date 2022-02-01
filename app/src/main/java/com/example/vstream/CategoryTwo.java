@@ -132,6 +132,9 @@ public class CategoryTwo extends AppCompatActivity {
                     }
                 });
 
+                //Hiding the delete Button
+                holder.delete_btn.setVisibility(View.INVISIBLE);
+
                 //Setting up the exoplayer
                 holder.setExoplayer(getApplication(),model.getVideoTitle(),model.getVideoURL());
             }
