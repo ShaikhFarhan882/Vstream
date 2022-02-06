@@ -82,30 +82,40 @@ public class Comment extends AppCompatActivity {
 
 
 
-
         //Submit button Implementation
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userReference.child(userId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //Fetching the user Name and image
-                        if(snapshot.exists()){
-                            String userName = snapshot.child("uName").getValue().toString();
-                            String userImage = snapshot.child("uImage").getValue().toString();
-                            processComment(userName,userImage);
+
+                if (!CommentText.getText().toString().isEmpty()) {
+                    userReference.child(userId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //Fetching the user Name and image
+                            if (snapshot.exists()) {
+                                String userName = snapshot.child("uName").getValue().toString();
+                                String userImage = snapshot.child("uImage").getValue().toString();
+                                processComment(userName, userImage);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    }
+                    });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                }
+                else {
+                    Toasty.warning(getApplicationContext(),"Cannot add empty comment",Toasty.LENGTH_SHORT).show();
+                }
 
             }
+
+
+
+
             private void processComment(String userName, String userImage){
                 String submittedText = CommentText.getText().toString();
                 String randomPostkey = userId + "" + new Random().nextInt(1000);
