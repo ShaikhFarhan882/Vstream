@@ -72,6 +72,7 @@ public class Profile extends AppCompatActivity {
     Uri filepath;
     Bitmap bitmap;
     String userID="";
+    String lastValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +99,7 @@ public class Profile extends AppCompatActivity {
         userEmail =(TextView)findViewById(R.id.emailtv_Profle);
         databaseReference = FirebaseDatabase.getInstance().getReference("userProfile");
         storageReference = FirebaseStorage.getInstance().getReference("uploadedProfileImages");
+        lastValue = Username.getText().toString();
 
 
         //Fetching the current user to store the image and name related to it.
@@ -134,10 +136,19 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+
         UpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateToFirebase();
+
+                if(profileImage.getDrawable()!=null && !(Username.getText().toString().isEmpty()) && lastValue != (Username.getText().toString()) ){
+                    updateToFirebase();
+                }
+                else {
+                    Toasty.error(getApplicationContext(),"Please Add Image and Username",Toasty.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -215,26 +226,52 @@ public class Profile extends AppCompatActivity {
 
 
 
+         // Updating the user Image and Name
+    /*    FirebaseUser usere = FirebaseAuth.getInstance().getCurrentUser();
+        userID = usere.getUid();
+
+        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    //Getting the name form database
+                    Username.setText(snapshot.child("uName").getValue().toString());
+                    //Getting the ImageUrl from database
+                    String imageUrl = (snapshot.child("uImage").getValue().toString());
+
+                    //Using the glide to display image from URL
+                    Glide.with(getApplicationContext()).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(profileImage);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==101 && resultCode==RESULT_OK){
+        if(requestCode==101 && resultCode==RESULT_OK && data!=null){
             filepath = data.getData();
-            //Setting the image on placeholder
-            try{
-                InputStream inputStream = getContentResolver().openInputStream(filepath);
-                bitmap = BitmapFactory.decodeStream(inputStream);
-                profileImage.setImageBitmap(bitmap);
+
+                //Setting the image on placeholder
+                try{
+                    InputStream inputStream = getContentResolver().openInputStream(filepath);
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    profileImage.setImageBitmap(bitmap);
 
 
-            }
-            catch (Exception ex){
-                Toasty.error(getApplicationContext(),ex.getMessage(),Toasty.LENGTH_SHORT).show();
+                }
+                catch (Exception ex){
+                    Toasty.error(getApplicationContext(),ex.getMessage(),Toasty.LENGTH_SHORT).show();
 
-            }
+                }
         }
     }
 
@@ -244,47 +281,56 @@ public class Profile extends AppCompatActivity {
         pd.show();
 
         final StorageReference uploader=storageReference.child("profileimages/"+"img"+System.currentTimeMillis());
-        uploader.putFile(filepath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                final Map<String,Object> map=new HashMap<>();
-                                map.put("uImage",uri.toString());
-                                map.put("uName",Username.getText().toString());
+        if(filepath!=null) {
 
-                                databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        //If exists then update
-                                        if(snapshot.exists())
-                                            databaseReference.child(userID).updateChildren(map);
-                                        //Insert if does not exists
-                                        else
-                                            databaseReference.child(userID).setValue(map);
+            uploader.putFile(filepath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    final Map<String, Object> map = new HashMap<>();
+                                    map.put("uImage", uri.toString());
+                                    map.put("uName", Username.getText().toString());
+
+                                    Log.e("Database Ref Snapshot",databaseReference.child(userID).toString());
+
+                                    //If user Does not exists setValue
+                                    if(databaseReference.child(userID)==null){
+                                        databaseReference.child(userID).setValue(map);
                                     }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    //if user exists Update the Value
+                                    else {
+                                        databaseReference.child(userID).updateChildren(map);
                                     }
-                                });
 
-                                pd.dismiss();
-                                Toasty.success(getApplicationContext(),"Updated Successfully",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        //Calculating the uploaded percentage
-                        float percent=(100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
-                        pd.setMessage("Uploaded :"+(int)percent+"%");
-                    }
-                });
+                                    pd.dismiss();
+                                    Toasty.success(getApplicationContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            //Calculating the uploaded percentage
+                            float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                            pd.setMessage("Uploaded :" + (int) percent + "%");
+                        }
+                    });
+        }
 
+        else {
+            final Map<String, Object> map = new HashMap<>();
+            map.put("uName", Username.getText().toString());
+
+            databaseReference.child(userID).updateChildren(map);
+
+            pd.dismiss();
+            Toasty.success(getApplicationContext(), "Updated Name Successfully", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     //Displaying the profile image and Name if user has already uploaded it in the app.
@@ -295,7 +341,7 @@ public class Profile extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
 
-        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
@@ -315,7 +361,6 @@ public class Profile extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
