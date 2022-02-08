@@ -5,19 +5,23 @@ public class ModelComment {
     String Date,Time;
     String userId,userImage;
     String userMessage,userName;
+    int commentId;
 
     //Default Constructor
     public ModelComment(){
 
     }
 
-    public ModelComment(String date, String time, String userId, String userImage, String userMessage, String userName) {
+
+    public ModelComment(String date, String time, String userId, String userImage, String userMessage, String userName,int commentId) {
         Date = date;
         Time = time;
         this.userId = userId;
         this.userImage = userImage;
         this.userMessage = userMessage;
         this.userName = userName;
+        this.commentId = commentId;
+
     }
 
     //Getter Setter
@@ -68,6 +72,14 @@ public class ModelComment {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 }
 

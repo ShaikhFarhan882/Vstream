@@ -226,31 +226,6 @@ public class Profile extends AppCompatActivity {
 
 
 
-         // Updating the user Image and Name
-    /*    FirebaseUser usere = FirebaseAuth.getInstance().getCurrentUser();
-        userID = usere.getUid();
-
-        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    //Getting the name form database
-                    Username.setText(snapshot.child("uName").getValue().toString());
-                    //Getting the ImageUrl from database
-                    String imageUrl = (snapshot.child("uImage").getValue().toString());
-
-                    //Using the glide to display image from URL
-                    Glide.with(getApplicationContext()).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(profileImage);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
     }
 
 
@@ -395,4 +370,6 @@ public class Profile extends AppCompatActivity {
 
 
 }
+
+
 

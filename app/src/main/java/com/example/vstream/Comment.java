@@ -2,10 +2,12 @@ package com.example.vstream;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -47,6 +50,8 @@ public class Comment extends AppCompatActivity {
     DatabaseReference userReference;
     DatabaseReference commentReference;
     String postKey;
+    String randomPostkey;
+    String myId;
     RecyclerView recyclerView;
 
     @Override
@@ -111,6 +116,7 @@ public class Comment extends AppCompatActivity {
                     Toasty.warning(getApplicationContext(),"Cannot add empty comment",Toasty.LENGTH_SHORT).show();
                 }
 
+
             }
 
 
@@ -118,7 +124,8 @@ public class Comment extends AppCompatActivity {
 
             private void processComment(String userName, String userImage){
                 String submittedText = CommentText.getText().toString();
-                String randomPostkey = userId + "" + new Random().nextInt(1000);
+                randomPostkey = userId + "" + new Random().nextInt(1000);
+                int commentId = new Random().nextInt(10000);
 
                 //Getting the Date and Time of the comment
                 String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
@@ -134,6 +141,7 @@ public class Comment extends AppCompatActivity {
                 comment.put("userMessage",submittedText);
                 comment.put("Time",currentTime);
                 comment.put("Date",currentDate);
+                comment.put("commentId",commentId);
 
                 commentReference.child(randomPostkey).updateChildren(comment)
                         .addOnCompleteListener(new OnCompleteListener() {
@@ -192,6 +200,30 @@ public class Comment extends AppCompatActivity {
                 holder.userMessage.setText(model.getUserMessage());
                 holder.dateTime.setText("Date:"+ model.getDate() + " " +"Time:" + model.getTime());
                 Glide.with(holder.userImage.getContext()).load(model.getUserImage()).into(holder.userImage);
+
+                //Setting up the delete interface for comments
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userid = user.getUid();
+                myId = getItem(position).getUserId();
+                final String rPostkey = getRef(position).getKey();
+
+
+                holder.setOnClickListener(new ViewHolderComment.ClickListener() {
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                       if(myId.equals(userid)){
+                           showDeleteDialog(myId,rPostkey);
+                       }
+                       else{
+                           Toasty.error(getApplicationContext(),"Cannot Delete Others Comment",Toasty.LENGTH_SHORT).show();
+                       }
+                    }
+                });
+
+
+
+
+
             }
 
             @NonNull
@@ -209,4 +241,33 @@ public class Comment extends AppCompatActivity {
 
 
     }
+
+    private void showDeleteDialog(String myId,String rPostkey) {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Delete")
+                .setMessage("Are you sure to delete this comment?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        deleteComment(myId,rPostkey);
+
+                    }
+                }).create().show();
+
+
+    }
+
+    private void deleteComment(String myId,String rPostkey){
+
+        DatabaseReference ref = commentReference;
+        ref.child(rPostkey).removeValue();
+        Toasty.success(getApplicationContext(),"Successfully Deleted Comment",Toasty.LENGTH_SHORT).show();
+
+    }
+
+
 }
+
