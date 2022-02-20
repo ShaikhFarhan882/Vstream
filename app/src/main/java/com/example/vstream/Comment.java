@@ -185,6 +185,9 @@ public class Comment extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //Displaying a toast message for how to delete a comment
+        Toasty.normal(getApplicationContext(),"Hold on comment to delete it",Toasty.LENGTH_SHORT).show();
+
         FirebaseRecyclerOptions<ModelComment> options =
                 new FirebaseRecyclerOptions.Builder<ModelComment>()
                         .setQuery(commentReference, ModelComment.class)
@@ -270,4 +273,6 @@ public class Comment extends AppCompatActivity {
 
 
 }
+
+
 

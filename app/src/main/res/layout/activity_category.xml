@@ -201,9 +201,6 @@
   </LinearLayout>
 
 
-
-
-
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/BottomNavigation"
       android:layout_width="match_parent"
@@ -213,7 +210,6 @@
       app:itemIconTint="@drawable/selector"
       app:itemTextColor="@color/white"
       app:menu="@menu/menu_navigation" />
-
 
 </RelativeLayout>
 

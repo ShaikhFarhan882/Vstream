@@ -111,7 +111,7 @@ public class SettingActivity extends AppCompatActivity {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hey check out my app at: https://drive.google.com/file/d/1Hzl6RwWJNVLXzCs5UBYhsVMNDnmCT5w6/view?usp=sharing");
+                        "Hey check out my app at: https://drive.google.com/file/d/1UUliIrmgTRfjug1GyR_4AvMnJZHZ7zvz/view?usp=sharing");
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Choose one"));
             }
@@ -192,3 +192,4 @@ public class SettingActivity extends AppCompatActivity {
 
 
 }
+
