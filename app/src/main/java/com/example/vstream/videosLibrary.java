@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -71,7 +73,9 @@ public class videosLibrary extends AppCompatActivity {
 
         String query = userID;
 
+
         Query firebaseQuery = databaseReference.orderByChild("currentUserId").startAt(query).endAt(query + "\uf8ff");
+
 
         FirebaseRecyclerOptions<Member> options =
                 new FirebaseRecyclerOptions.Builder<Member>()
@@ -173,11 +177,34 @@ public class videosLibrary extends AppCompatActivity {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
 
 
+
+
         //Checking if the user is connected to internet or not with isOnline function
         if (!isOnline()) {
             Toasty.error(getApplicationContext(), "Network connection is not Available", Toasty.LENGTH_SHORT).show();
             Toasty.error(getApplicationContext(), "Unable to View Videos library", Toasty.LENGTH_SHORT).show();
         }
+
+
+        //checking if the data exists or not in the firebase
+        Query dataChecker = databaseReference.orderByChild("currentUserId").equalTo(query);
+
+        dataChecker.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toasty.success(getApplicationContext(),"Videos Found",Toasty.LENGTH_SHORT).show();
+                }
+                else{
+                    Toasty.error(getApplicationContext(),"No Videos Found",Toasty.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }

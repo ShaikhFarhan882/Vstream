@@ -95,6 +95,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+
     //Checking if the user has liked a video or not
     public void getLikeButtonStatus(final String postKey,final String currentUserId){
 
@@ -125,12 +126,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-
-
     }
-
-
-
 
 
 

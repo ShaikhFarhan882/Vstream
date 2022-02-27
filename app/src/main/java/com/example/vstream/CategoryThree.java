@@ -165,6 +165,26 @@ public class CategoryThree extends AppCompatActivity {
             Toasty.error(getApplicationContext(), "Unable to Load Videos", Toasty.LENGTH_SHORT).show();
         }
 
+        //checking if the data exists or not in the firebase
+        Query dataChecker = databaseReference.orderByChild("videoCategory").equalTo(query);
+
+        dataChecker.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toasty.success(getApplicationContext(),"Videos Found",Toasty.LENGTH_SHORT).show();
+                }
+                else{
+                    Toasty.error(getApplicationContext(),"No Videos Found",Toasty.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 

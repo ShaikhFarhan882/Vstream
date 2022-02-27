@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -164,6 +165,26 @@ public class CategoryOne extends AppCompatActivity {
             Toasty.error(getApplicationContext(), "Unable to Load Videos", Toasty.LENGTH_SHORT).show();
         }
 
+
+        //checking if the data exists or not in the firebase
+        Query dataChecker = databaseReference.orderByChild("videoCategory").equalTo(query);
+
+        dataChecker.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toasty.success(getApplicationContext(),"Videos Found",Toasty.LENGTH_SHORT).show();
+                }
+                else{
+                    Toasty.error(getApplicationContext(),"No Videos Found",Toasty.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }
