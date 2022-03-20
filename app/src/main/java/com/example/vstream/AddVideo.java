@@ -127,7 +127,12 @@ public class AddVideo extends AppCompatActivity {
         Upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadProcess();
+                if(!videoTitle.getText().toString().isEmpty()){
+                    uploadProcess();
+                }
+                else {
+                    Toasty.error(getApplicationContext(),"Please Enter Video Title",Toasty.LENGTH_SHORT).show();
+                }
             }
         });
 
